@@ -2,17 +2,21 @@
 
 # Overview: 
 
-This repository contains the **R scripts** used to create the machine learning models used to predict the response to DMARD treatment in rheumatoid arthritis patients using lipid mediator profiles and clinical scores.
+This repository contains the **R scripts** used to create the machine learning models used to predict the response to DMARD treatment in rheumatoid arthritis patients using lipid mediator profiles and clinical scores. The machine learning methodologies used were: Bayesian classifier, Elastic net regression, Support Vector Machine and random forest.
 
-These scripts were also used for the evaluation step of the models (using a test cohort) and the Receiver Operating Characteristic (ROC) curve. 
+These scripts were also used for the evaluation step of the models (using an evaluation cohort) and the Receiver Operating Characteristic (ROC) curve. 
 
-**NOTE:** **MetaboAnalyst web-based application** (more information [here](https://www.metaboanalyst.ca//faces/ModuleView.xhtml)) (version 4.0) was used to perform some statistical analyses such as partial least squares-discrimination analysis (PLS-DA), orthagonal partial least squares-discrimination analysis (oPLS-DA), variance importance in projection analysis (VIP).
+Finally, it also contains a small script that was used to do the differential gene expression analysis of the ALOX12, ALOX5, ALOX15 and ALOX15B enzymes.
+
+**NOTE:** **MetaboAnalyst web-based application** (more information [here](https://www.metaboanalyst.ca//faces/ModuleView.xhtml)) (version 4.0) was used to perform some statistical analyses such as partial least squares-discrimination analysis (PLS-DA), orthagonal partial least squares-discrimination analysis (oPLS-DA) and variance importance in projection analysis (VIP).
+
+**NOTE:** **Cytoscape* (more information [here](https://cytoscape.org/)) was used to create the pathway analysis after statistical comparison of normalized data using a student t test. 
 
 # System Requirements: 
 
 ## Hardware requirements: 
 
-All the scripts and software used for the **9 months report** were run in a standard computer (RAM: 8GB, CP$: 4 cores, 3.60 GHZ/core) with a maximum runtime of approx. 20 minutes for the more demanding script ([**1_classyfire_(SVM_models).R**](https://github.com/eagomezc/2020_Biomarkers_identification_ML_and_RA/blob/master/b_R_Scripts/1_classyfire_(SVM_models).R)). 
+All the scripts and software used for the **18 months report** were run in a standard computer (RAM: 8GB, CP$: 4 cores, 3.60 GHZ/core) with a maximum runtime of approx. 30 minutes for the more demanding script ([**FILL**](FILL)). 
 
 A computer with lower specs (e.g. 2GB of RAM) will work but some scripts will take longer to run. 
 
@@ -30,7 +34,7 @@ For installing R and R Studio, follows the installation instructions [here](http
 
 ## Required R packages (libraries): 
 
-The required packages to run all the scripts contained in this repository can be installed as follow: 
+The requiered packates to run all scripts should be installed automatically when you run each scritp; however, in case you need to install them manually, you can do it as follow:
 
 The last version of classyfire (0.1-2) package can be found [here](https://cran.r-project.org/src/contrib/Archive/classyfire/)
 
@@ -41,8 +45,8 @@ install.packages("C:pathToDirectory/classyfire_0.1-2.tar.gz",
                   repos = NULL, 
                   type = "source")
                   
-# Packages ggplot2, pROC, randomForest and caret:
-install.packages(c('ggplot2', 'pROC', 'randomForest', 'caret'))
+# Packages ggplot2, pROC, randomForest, caret, gridExtra, snowfall, neldermead, optimbase, glmnet, dplyr, arm:
+install.packages(c('ggplot2', 'pROC', 'randomForest', 'caret', 'gridExtra', 'snowfall', 'neldermead', 'optimbase', 'glmnet', 'dplyr', 'arm'))
 
 # Package edgeR from Bioconductor:
 if (!requireNamespace("BiocManager", quietly = TRUE))
