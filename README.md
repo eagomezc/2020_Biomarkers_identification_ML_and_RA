@@ -16,7 +16,7 @@ Finally, it also contains a small script that was used to do the differential ge
 
 ## Hardware requirements: 
 
-All the scripts and software used for the **18 months report** were run in a standard computer (RAM: 8GB, CP$: 4 cores, 3.60 GHZ/core) with a maximum runtime of approx. 30 minutes for the more demanding script ([**FILL**](FILL)). 
+All the scripts and software used for the **18 months report** were run in a standard computer (RAM: 8GB, CP$: 4 cores, 3.60 GHZ/core) with a maximum runtime of approx. 30 minutes for the more demanding script ([**1_machine_learning_(All_methodologies).R**](https://github.com/eagomezc/2020_Biomarkers_identification_ML_and_RA/blob/master/b_R_Scripts/1_machine_learning_(All_methodologies).R)). 
 
 A computer with lower specs (e.g. 2GB of RAM) will work but some scripts will take longer to run. 
 
@@ -63,9 +63,11 @@ This folder contains, separated by subfolders, the different file formats that h
 
 The subfolders are:
 
-**1_classyfire_(SVM_models)**: Contains a tab-delimited table with the training dataset (Patients as columns and Lipid mediators as rows) and a tab-delimited table with the evaluation dataset (Patients as columns and Lipid mediators as rows).
+**1_machine_learning_(All_methodologies)**: Contains a tab-delimited table with the training dataset (Patients as rows and Lipid mediators as columns, including classification and fatty acid families) and a tab-delimited table with the clinical scores for the same patients.
 
 **2_randomForest_(RF_models)**: Contains a tab-delimited table with the training dataset (Patients as rows and Lipid mediators as columns) and a tab-delimited table with the evaluation dataset (Patients as rows and Lipid mediators as columns).
+
+**3_DGE_analysis_(Edge_R)**: Contains a tab-delimited table with the raw RNA-seq read counts (Patients as columns and interested genes as rows) and tab-delimited table with the classification information (Responder or Non Responder) of the patients (One column with patient IDs and one column with response class).
 
 More details about the format of this files can be seen in the comments of each script. 
 
@@ -75,9 +77,11 @@ This folder contains the scripts used to create the support vector machine and r
 
 The scripts are: 
 
-**1_classyfire_(SVM_models).R**: Using a training dataset, this script creates the machine learning models used to predict the response to DMARD treatment in rheumatoid arthritis patient. The script works with the package **classyfire** that uses support vector machine and bootstrapping for the model creation. It also uses the a test cohort to validate the models and estimate the MCC value. 
+**1_machine_learning_(All_methodologies).R**: Using a training dataset, this script creates the machine learning models (Bayesian, Elastic net, SVM and random forest) used to predict the response to DMARD treatment in rheumatoid arthritis patient. The script works with the packages **classyfire, randomForest, glmnet, caret, arm** that use different machine learning methodologies and bootstrapping for the model creation. 
 
 **2_randomForest_(RF_models).R**: Using a training dataset, this script creates the machine learning models used to predict the response to DMARD treatment in rheumatoid arthritis patient. The script works with the package **randomForest** that uses random forests and bootstrapping for the model creation. Besides that, estimate the **importance** of each lipid mediator in the improvement of the model's accuracy. Finally, it also uses the test cohort to evaluate the models and estimate the area under the receiver operating characteristic curves (AUC). 
+
+**3_DGE_analysis_(Edge_R).R**: Using RNA-seq raw read counts, this scripts performs differential gene expression analysis using the package **Edge R**, that uses the quasi-likelihood method to identify differences in the expression levels of specific genes between the DMARD responder and Non Responder rheumatoid arthritis patients. It also creates violin plots as a way to visualize the different gene expression levels.
 
 More details of how the scripts works can be seen in the comments of each script. 
 
@@ -87,15 +91,17 @@ This folder contains, separated by subfolders, the different expected outputs th
 
 The subfolders are:
 
-**1_classyfire_(SVM_models)**: The expected results from this script are a tab-delimited file containing a table with the model's names, their accuracy percentages and their MCC values after validation with the test cohort; and the different models saved as an R object that can be used in the future.  
+**1_machine_learning_(All_methodologies).R**: The expected results from this script are a tab-delimited file containing a table with the model's names, the machine learning strategy used, their accuracy percentages, sensitivity, specificity and confusion table; a figure of all the models with their accuracy score, the tunning parameters figure and the different models saved as an R object that can be used in the future.  
 
 **2_randomForest_(RF_models)**: The expected results from this script are a tab-delimited file containing a table with the model's names, their accuracy percentages and their AUC values after evaluation with the test cohort; the different models saved as an R object that can be used in the future; and pdf files that contains plots associated with the performance of the models and the importance of each lipid mediator in the construction of the models. 
 
+**3_DGE_analysis_(Edge_R)**: The expected results from this script is a tab-delimited file containing a table with the gene's names, their log(FC), log(CPM), F value, p value and adjust p value (FDR). In addition, is expected to generate a pdf file with violin plots of ALOX-related enzymes.
+
 More details about how this files are generated can be seen in the comments of each script. 
 
-# 9 Months Report:
+# 18 Months Report:
 
-The 9 months report can also be found in this repository. You can have access to it [here](https://github.com/eagomezc/2020_Biomarkers_identification_ML_and_RA/blob/master/9%20Month%20Report%20-%20Esteban%20Alberto%20Gomez%20Cifuentes.pdf).
+The 9 months report can also be found in this repository. You can have access to it [here](https://github.com/eagomezc/2020_Biomarkers_identification_ML_and_RA/blob/master/18%20Months%20Report%20Esteban%20Gomez%20Cifuentes%20190521.pdf).
  
  
 
