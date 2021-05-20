@@ -31,7 +31,7 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 # Lipid mediators file:
 
 lm_profile <- read.table(
-  file = "../../input/1_machine_learning/2_randomForest_(RF_models)_data.tsv",
+  file = "../a_Data/1_machine_learning_(All_methodologies)/1_machine_learning_data.tsv",
   header = TRUE,
   row.names = 1, # Specify that the first column is row names. 
   sep = "\t",
@@ -40,7 +40,7 @@ lm_profile <- read.table(
 # Clinical variables file: 
 
 clinical_scores <- read.table(
-  file = "../../input/1_machine_learning/clinical_first_cohort_chopped.tsv",
+  file = "../a_Data/1_machine_learning_(All_methodologies)/1_clinical_score_data.tsv",
   header = TRUE,
   row.names = 1, # Specify that the first column is row names. 
   sep = "\t")
@@ -156,7 +156,8 @@ rf_lm_profiles_final <- randomForest(responses ~ ., data = lm_profiles_scale, mt
 
 #Save the model:
 saveRDS(rf_lm_profiles_final, 
-        file = paste("../../output/1_machine_learning/rf_", names(dataframes_list)[j], ".R", sep = ""),  
+        file = paste("../c_Expected_Output/1_machine_learning_(All_methodologies)/rf_", 
+                     names(dataframes_list)[j], ".R", sep = ""),  
         ascii = FALSE, version = NULL, compress = TRUE, refhook = NULL)
 
 # Get the confusion matrix of the model, sensitivity and specificity: 
@@ -234,7 +235,8 @@ conf_matrix <- as.data.frame(getConfMatr(support_lmprofiles_scale))
 #Save the model:
 
 saveRDS(support_lmprofiles_scale, 
-        file = paste("../../output/1_machine_learning/svm_", names(dataframes_list)[j], ".R", sep = ""),  
+        file = paste("../c_Expected_Output/1_machine_learning_(All_methodologies)/svm_", 
+                     names(dataframes_list)[j], ".R", sep = ""),  
         ascii = FALSE, version = NULL, compress = TRUE, refhook = NULL)
 
 # SVM table:
@@ -327,7 +329,8 @@ conf_net <- as.data.frame(confusionMatrix(model_net, "none")$table)
 #Save the model:
 
 saveRDS(model_net, 
-        file = paste("../../output/1_machine_learning/net_", names(dataframes_list)[j], ".R", sep = ""),  
+        file = paste("../c_Expected_Output/1_machine_learning_(All_methodologies)/net_", 
+                     names(dataframes_list)[j], ".R", sep = ""),  
         ascii = FALSE, version = NULL, compress = TRUE, refhook = NULL)
 
 # Final Elastic net model table:
@@ -393,7 +396,7 @@ bayesian <- train(explanatory, lm_profiles_scale$responses, method = "bayesglm",
 #Save the model:
 
 saveRDS(bayesian, 
-        file = paste("../../output/1_machine_learning/bayesian_", names(dataframes_list)[j], ".R", sep = ""),  
+        file = paste("../c_Expected_Output/1_machine_learning_(All_methodologies)/bayesian_", names(dataframes_list)[j], ".R", sep = ""),  
         ascii = FALSE, version = NULL, compress = TRUE, refhook = NULL)
 
 conf_bay <- as.data.frame(confusionMatrix(bayesian, "none")$table)
@@ -469,7 +472,7 @@ rf_clinical_final <- randomForest(responses ~ ., data = clinical_scores_impute, 
 
 #Save the model:
 saveRDS(rf_clinical_final, 
-        file = "../../output/1_machine_learning/rf_clinical_score.R",  
+        file = "../c_Expected_Output/1_machine_learning_(All_methodologies)/rf_clinical_score.R",  
         ascii = FALSE, version = NULL, compress = TRUE, refhook = NULL)
 
 # Get the confusion matrix of the model, sensitivity and specificity: 
@@ -575,19 +578,19 @@ colnames(final_table)[2] <- "Model"
 # Save output files: 
 
 write.table(final_table, 
-            file = "../../output/1_machine_learning/final_table.tsv",
+            file = "../c_Expected_Output/1_machine_learning_(All_methodologies)/final_table.tsv",
             sep = "\t",
             quote = FALSE,
             row.names = FALSE)  
 
-pdf(file = "../../output/1_machine_learning/accuracy_plot.pdf",
-    width = 20, height = 10, onefile = TRUE)
+png(file = "../c_Expected_Output/1_machine_learning_(All_methodologies)/accuracy_plot.pdf",
+    width = 1500, height = 1100, onefile = TRUE)
 
 accuracy
 
 dev.off()
 
-pdf(file = "../../output/1_machine_learning/tunning.pdf",
+pdf(file = "../c_Expected_Output/1_machine_learning_(All_methodologies)/tunning.pdf",
     width = 18, height = 25, onefile = TRUE)
 
 grid.arrange(grobs = rf_plot_list,  ncol = column/2)
